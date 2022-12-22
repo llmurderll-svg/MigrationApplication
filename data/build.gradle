@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace APPLICATION_DATA
+    compileSdk MAX_SDK
+
+    defaultConfig {
+        minSdk MIN_SDK
+        targetSdk MAX_SDK
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
+            minifyEnabled false
+        }
+        qa{
+            debuggable true
+            minifyEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include:['*.jar'] )
+    //modules
+    implementation project(path: ':common')
+    implementation project(path: ':domain')
+
+    //androidx core
+    implementation "androidx.core:core-ktx:$ANDROIX_CORE"
+    //kotlin stdlib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    //gson
+    implementation "com.google.code.gson:gson:$GSON_VERSION"
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    //okhttp
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
+    //coroutines for retrofit support
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$COROUTINES_ADAPTER"
+    //room
+    implementation "androidx.room:room-runtime:$ROOM_VERSION"
+    kapt "androidx.room:room-compiler:$ROOM_VERSION"
+    implementation "androidx.room:room-ktx:$ROOM_VERSION"
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$HILT_VERSION"
+    kapt "com.google.dagger:hilt-compiler:$HILT_VERSION"
+    //view model and live data
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
+    implementation "androidx.lifecycle:lifecycle-livedata:$LIFECYCLE_VERSION"
+    //kotlin reflect
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$KOTLIN_VERSION"
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}

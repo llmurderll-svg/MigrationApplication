@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MigrationApplication</string>
+    <string name="permissions_solicitude">Solicitud de permisos</string>
+</resources>

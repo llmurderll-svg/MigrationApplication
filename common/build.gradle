@@ -1,0 +1,70 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace APPLICATION_COMMON
+    compileSdk MAX_SDK
+
+    defaultConfig {
+        minSdk MIN_SDK
+        targetSdk MAX_SDK
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
+            minifyEnabled false
+        }
+        qa{
+            debuggable true
+            minifyEnabled true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include:['*.jar'] )
+    //androidx core
+    implementation "androidx.core:core-ktx:$ANDROIX_CORE"
+    //kotlin stdlib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    //app compat
+    implementation "androidx.appcompat:appcompat:$APP_COMPAT"
+    //material
+    implementation "com.google.android.material:material:$MATERIAL_VERSION"
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$HILT_VERSION"
+    kapt "com.google.dagger:hilt-compiler:$HILT_VERSION"
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
+    implementation "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+    //gms base
+    implementation "com.google.android.gms:play-services-base:$PLAYSERVICES_VERSION"
+
+    //testing
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+}

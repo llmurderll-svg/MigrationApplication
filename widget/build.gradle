@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace APPLICATION_WIDGET
+    compileSdk MAX_SDK
+
+    defaultConfig {
+        minSdk MIN_SDK
+        targetSdk MAX_SDK
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
+            minifyEnabled false
+        }
+        qa{
+            debuggable true
+            minifyEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include:['*.jar'] )
+    //modules
+    implementation project(path: ':common')
+    //androidx core
+    implementation "androidx.core:core-ktx:$ANDROIX_CORE"
+    //kotlin stdlib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    //app compat
+    implementation "androidx.appcompat:appcompat:$APP_COMPAT"
+    //material
+    implementation "com.google.android.material:material:$MATERIAL_VERSION"
+    //constraint layout
+    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_VERSION"
+    //lottie
+    implementation "com.airbnb.android:lottie:$LOTTIE_VERSION"
+    //shimmer
+    implementation "com.facebook.shimmer:shimmer:$SHIMMER_VERSION"
+    //glide
+    implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    //view model and live data
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
+    implementation "androidx.lifecycle:lifecycle-livedata:$LIFECYCLE_VERSION"
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINES_VERSION"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$COROUTINES_VERSION"
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$HILT_VERSION"
+    kapt "com.google.dagger:hilt-compiler:$HILT_VERSION"
+
+    //testing
+    testImplementation "junit:junit:$JUNIT_VERSION"
+    androidTestImplementation "androidx.test.ext:junit:$TEST_JUNIT"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+}

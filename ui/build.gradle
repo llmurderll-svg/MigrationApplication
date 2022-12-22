@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace APPLICATION_UI
+    compileSdk MAX_SDK
+
+    defaultConfig {
+        minSdk MIN_SDK
+        targetSdk MAX_SDK
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            debuggable true
+            minifyEnabled false
+        }
+        qa{
+            debuggable true
+            minifyEnabled true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include:['*.jar'] )
+    //modules
+    implementation project(path: ':common')
+    implementation project(path: ':widget')
+    //androidx core
+    implementation "androidx.core:core-ktx:$ANDROIX_CORE"
+    //kotlin stdlib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION"
+    //app compat
+    implementation "androidx.appcompat:appcompat:$APP_COMPAT"
+    //material
+    implementation "com.google.android.material:material:$MATERIAL_VERSION"
+    //constraint layout
+    implementation "androidx.constraintlayout:constraintlayout:$CONSTRAINT_VERSION"
+    //navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
+    implementation "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+    //view model and live data
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$LIFECYCLE_VERSION"
+    implementation "androidx.lifecycle:lifecycle-livedata:$LIFECYCLE_VERSION"
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$HILT_VERSION"
+    kapt "com.google.dagger:hilt-compiler:$HILT_VERSION"
+    //lottie
+    implementation "com.airbnb.android:lottie:$LOTTIE_VERSION"
+
+    //testing
+    testImplementation "junit:junit:$JUNIT_VERSION"
+    androidTestImplementation "androidx.test.ext:junit:$TEST_JUNIT"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$ESPRESSO_VERSION"
+}
